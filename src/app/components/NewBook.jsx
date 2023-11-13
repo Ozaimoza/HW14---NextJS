@@ -11,6 +11,9 @@ const CreateBookForm = () => {
     pages: "",
     image: null,
   });
+  const token =
+    typeof window !== "undefined" ? window.localStorage.getItem("token") : null;
+  // console.log(token);
 
   const [selectedImages, setSelectedImages] = useState([]);
 
@@ -73,6 +76,9 @@ const CreateBookForm = () => {
     try {
       const response = await fetch("/api/books", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData, // Menggunakan FormData sebagai body
       });
 
